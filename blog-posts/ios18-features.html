@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <link rel="icon" href="../assets/images/1311.png" />
+		<title>iOS 18 New Features for Developers - Nemanja's iOS Portfolio</title>
+    <meta name="description" content="Discover the latest iOS 18 features that developers should know about, from new APIs to enhanced frameworks in Apple's latest mobile OS.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+
+		<script defer src="../js/script.js"></script>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="../index.html">
+        <span class="nav-title">Nemanja's iOS Portfolio</span>
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">Blog</span>
+        </a>
+        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- BLOG POST HEADER -->
+      <div id="project-header">
+        <div class="main-title">iOS 18 New Features for Developers</div>
+        <div class="body-text">Discover the latest iOS 18 features that developers should know about. From new APIs to enhanced frameworks, see what's new in Apple's latest mobile operating system.</div>
+        <div class="image-caption">Published on November 15, 2024 • 9 min read</div>
+      </div>
+
+      <!-- BLOG POST CONTENT -->
+      <div id="project-details">
+        <div class="subheader-text">Introduction</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 brings significant enhancements for developers, introducing new frameworks, APIs, and capabilities that enable more powerful and engaging applications. From advanced SwiftUI features to improved system integrations, this release focuses on giving developers more tools to create exceptional user experiences.</div>
+          
+          <div class="body-text">In this comprehensive overview, I'll walk you through the most important iOS 18 features for developers, including practical examples and implementation guidance. These features represent opportunities to enhance your apps and take advantage of the latest iOS capabilities.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">SwiftUI Enhancements</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 brings substantial improvements to SwiftUI, making it more powerful and expressive than ever before.</div>
+          
+          <div class="body-text"><strong>1. Mesh Gradients:</strong> Create stunning visual effects with new mesh gradient capabilities:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct MeshGradientView: View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var body: some View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MeshGradient(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.0, 0.0], [0.5, 0.0], [1.0, 0.0],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.0, 0.5], [0.5, 0.5], [1.0, 0.5],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.0, 1.0], [0.5, 1.0], [1.0, 1.0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.red, .orange, .yellow,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.green, .blue, .indigo,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.purple, .pink, .cyan<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.ignoresSafeArea()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. Scrolling Enhancements:</strong> New scroll view capabilities with scroll position tracking and custom scroll targets:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct ScrollPositionDemo: View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@State private var scrollPosition: Int? = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var body: some View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ScrollView {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LazyVStack {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ForEach(0..<100, id: \.self) { index in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoundedRectangle(cornerRadius: 8)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fill(Color.blue.opacity(0.3))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.frame(height: 60)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.overlay(Text("Item \(index)"))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.scrollPosition(id: $scrollPosition)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toolbar {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ToolbarItem {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Button("Go to top") {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;withAnimation {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollPosition = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>3. Custom Containers:</strong> Build custom container views with proper SwiftUI integration:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct CustomContainer&lt;Content: View&gt;: View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@ViewBuilder let content: () -> Content<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var body: some View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_ContainerView {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} background: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoundedRectangle(cornerRadius: 12)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fill(.ultraThinMaterial)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">App Intents Framework Improvements</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 significantly expands the App Intents framework, enabling deeper Siri integration and Shortcuts functionality.</div>
+          
+          <div class="body-text"><strong>Enhanced Siri Integration:</strong> Create more natural and context-aware Siri experiences:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct CreateTaskIntent: AppIntent {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static var title: LocalizedStringResource = "Create Task"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static var description = IntentDescription("Creates a new task in your task list")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Parameter(title: "Task Title", description: "What would you like to do?")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var taskTitle: String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Parameter(title: "Due Date", description: "When is this due?")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var dueDate: Date?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Parameter(title: "Priority", description: "How important is this task?")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var priority: TaskPriority<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func perform() async throws -> some IntentResult & ProvidesDialog {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let task = Task(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: taskTitle,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dueDate: dueDate,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority: priority<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try await TaskManager.shared.addTask(task)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return .result(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog: IntentDialog("Task '\(taskTitle)' has been created successfully")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>Smart Parameters:</strong> Use dynamic options and validation for better user experiences:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+enum TaskPriority: String, AppEnum {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case low = "low"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case medium = "medium"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case high = "high"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case urgent = "urgent"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Priority")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.low: "Low Priority",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.medium: "Medium Priority",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.high: "High Priority",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.urgent: "Urgent"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Control Center Widgets</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 introduces the ability to create custom Control Center widgets, giving users quick access to your app's key features.</div>
+          
+          <div class="body-text"><strong>Creating Control Center Widgets:</strong></div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct FlashlightControlWidget: ControlWidget {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static let kind: String = "FlashlightControl"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var body: some ControlWidgetConfiguration {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StaticControlConfiguration(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kind: Self.kind,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider: FlashlightControlProvider()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) { value in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ControlWidgetToggle(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Flashlight",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isOn: value.isOn,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action: FlashlightToggleIntent(enabled: !value.isOn)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image(systemName: "flashlight.on.fill")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.displayName("Flashlight")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.description("Toggle your device's flashlight")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>Interactive Controls:</strong> Create controls with multiple interaction types:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct VolumeControlWidget: ControlWidget {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var body: some ControlWidgetConfiguration {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StaticControlConfiguration(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kind: "VolumeControl",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider: VolumeProvider()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) { value in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ControlWidgetSlider(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Volume",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: value.volume,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in: 0...1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action: SetVolumeIntent.self<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image(systemName: "speaker.wave.2.fill")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Enhanced Privacy and Security</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 introduces new privacy features that give users more control while providing developers with better tools for handling sensitive data.</div>
+          
+          <div class="body-text"><strong>1. Automatic Permission Requests:</strong> More intelligent permission timing based on user context:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let locationManager = CLLocationManager()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var authorizationStatus: CLAuthorizationStatus = .notDetermined<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;override init() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.init()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locationManager.delegate = self<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func requestLocationWhenInUse() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// iOS 18 automatically determines best time to show permission<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locationManager.requestWhenInUseAuthorization()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorizationStatus = manager.authorizationStatus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. App Privacy Report Integration:</strong> Provide transparency about data usage:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+// Privacy manifest updates<br>
+// PrivacyInfo.xcprivacy<br>
+{<br>
+&nbsp;&nbsp;"NSPrivacyCollectedDataTypes": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypeLocation",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"NSPrivacyCollectedDataTypeLinked": true,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"NSPrivacyCollectedDataTypeTracking": false,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"NSPrivacyCollectedDataTypePurposes": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"NSPrivacyCollectedDataTypePurposeAppFunctionality"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;]<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Advanced Core Data Features</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 enhances Core Data with better performance, debugging tools, and CloudKit integration improvements.</div>
+          
+          <div class="body-text"><strong>Persistent History Improvements:</strong> Better tracking and management of data changes:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class CoreDataManager {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let container: NSPersistentContainer<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;init() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;container = NSPersistentContainer(name: "DataModel")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Enable new iOS 18 history features<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;guard let description = container.persistentStoreDescriptions.first else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// New in iOS 18: Enhanced history tracking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description.setOption(true as NSNumber, forKey: "NSPersistentHistoryTrackingEnhancedKey")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;container.loadPersistentStores { _, error in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if let error = error {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fatalError("Core Data error: \(error)")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Metal and Graphics Enhancements</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 brings significant improvements to Metal performance and new graphics capabilities for demanding applications.</div>
+          
+          <div class="body-text"><strong>MetalFX Integration:</strong> Enhanced upscaling and rendering techniques:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+import MetalFX<br>
+<br>
+class MetalRenderer {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let device: MTLDevice<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let upscaler: MTLFXSpatialScaler?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;init(device: MTLDevice) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.device = device<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create MetalFX upscaler for better performance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let descriptor = MTLFXSpatialScalerDescriptor()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptor.inputWidth = 1920<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptor.inputHeight = 1080<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptor.outputWidth = 3840<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptor.outputHeight = 2160<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptor.colorTextureFormat = .bgra8Unorm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upscaler = descriptor.makeSpatialScaler(device: device)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func renderWithUpscaling(inputTexture: MTLTexture, outputTexture: MTLTexture, commandBuffer: MTLCommandBuffer) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upscaler?.encode(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandBuffer: commandBuffer,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inputTexture: inputTexture,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputTexture: outputTexture<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Migration and Adoption Strategy</div>
+        <div class="project-details-content">
+          <div class="body-text">When adopting iOS 18 features, consider a phased approach that maintains compatibility with earlier iOS versions while taking advantage of new capabilities.</div>
+          
+          <div class="body-text"><strong>Feature Detection and Graceful Degradation:</strong></div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+struct AdaptiveFeatureView: View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var body: some View {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if #available(iOS 18.0, *) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Use new iOS 18 features<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MeshGradient(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 2, height: 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points: [[0,0], [1,0], [0,1], [1,1]],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: [.blue, .green, .red, .yellow]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Fallback for earlier iOS versions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LinearGradient(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: [.blue, .green],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startPoint: .topLeading,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;endPoint: .bottomTrailing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>Testing Strategy:</strong> Ensure your iOS 18 features work correctly across different device types and iOS versions through comprehensive testing.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Conclusion</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS 18 represents a significant step forward for iOS development, offering powerful new tools and capabilities that enable developers to create more engaging and sophisticated applications. From enhanced SwiftUI features to improved system integrations, these additions provide opportunities to elevate user experiences.</div>
+          
+          <div class="body-text">The key to successful iOS 18 adoption is understanding which features provide the most value for your specific use case and users. Start with the features that align with your app's core functionality, and gradually expand to leverage more advanced capabilities as you become comfortable with the new APIs.</div>
+          
+          <div class="body-text">As always, prioritize user experience and performance while taking advantage of these new capabilities. The best apps will be those that thoughtfully integrate iOS 18 features to solve real user problems and create delightful experiences.</div>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div style="display: flex; gap: 16px; margin-top: 48px;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">← Back to Blog</span>
+        </a>
+        <a class="button" href="../index.html">
+          <span class="button-text">Portfolio</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+      <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
+        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+      </a>
+      <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
+        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+      </a>
+    </div>
+
+	</body>
+</html>

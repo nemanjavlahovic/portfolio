@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <link rel="icon" href="../assets/images/1311.png" />
+		<title>Building Scalable SwiftUI Architecture - Nemanja's iOS Portfolio</title>
+    <meta name="description" content="Learn how to structure SwiftUI apps for maintainability and scalability with MVVM patterns, dependency injection, and state management.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+
+		<script defer src="../js/script.js"></script>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="../index.html">
+        <span class="nav-title">Nemanja's iOS Portfolio</span>
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">Blog</span>
+        </a>
+        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- BLOG POST HEADER -->
+      <div id="project-header">
+        <div class="main-title">Building Scalable SwiftUI Architecture</div>
+        <div class="body-text">How to structure your SwiftUI apps for maintainability and scalability using proven architectural patterns.</div>
+        <div class="image-caption">Published on December 15, 2024 • 8 min read</div>
+      </div>
+
+      <!-- BLOG POST CONTENT -->
+      <div id="project-details">
+        <div class="subheader-text">Introduction</div>
+        <div class="project-details-content">
+          <div class="body-text">As SwiftUI applications grow in complexity, having a solid architectural foundation becomes crucial for maintainability, testability, and team collaboration. After working on several production SwiftUI apps over the past few years, I've learned valuable lessons about what works and what doesn't when it comes to structuring SwiftUI applications.</div>
+          
+          <div class="body-text">In this post, I'll share the architectural patterns and best practices that have served me well in building scalable SwiftUI applications. We'll cover MVVM implementation, dependency injection, state management, and how to organize your codebase for maximum maintainability.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">The MVVM Pattern in SwiftUI</div>
+        <div class="project-details-content">
+          <div class="body-text">SwiftUI naturally encourages the MVVM (Model-View-ViewModel) pattern, but implementing it correctly requires careful consideration. The key is to keep your views simple and push all business logic into observable view models.</div>
+          
+          <div class="body-text">Here's how I structure a typical view model:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+@MainActor<br>
+class UserProfileViewModel: ObservableObject {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var user: User?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var isLoading = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var errorMessage: String?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let userService: UserServiceProtocol<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;init(userService: UserServiceProtocol) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.userService = userService<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func loadUser(id: String) async {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isLoading = true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage = nil<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user = try await userService.fetchUser(id: id)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage = error.localizedDescription<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isLoading = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text">Notice how the view model is marked with @MainActor to ensure all UI updates happen on the main thread, and how dependencies are injected through the initializer rather than created internally.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Dependency Injection</div>
+        <div class="project-details-content">
+          <div class="body-text">Dependency injection is crucial for testability and loose coupling. I prefer using a simple container-based approach that leverages SwiftUI's environment system:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class DIContainer: ObservableObject {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lazy var userService: UserServiceProtocol = UserService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lazy var authService: AuthServiceProtocol = AuthService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lazy var networkService: NetworkServiceProtocol = NetworkService()<br>
+}<br>
+<br>
+// Environment key<br>
+private struct DIContainerKey: EnvironmentKey {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static let defaultValue = DIContainer()<br>
+}<br>
+<br>
+extension EnvironmentValues {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var diContainer: DIContainer {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get { self[DIContainerKey.self] }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set { self[DIContainerKey.self] = newValue }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text">This approach allows you to inject dependencies at the app level and access them throughout your view hierarchy using the @Environment property wrapper.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">State Management Strategies</div>
+        <div class="project-details-content">
+          <div class="body-text">State management in SwiftUI can be tricky, especially in larger applications. I follow these principles:</div>
+          
+          <div class="body-text"><strong>1. Single Source of Truth:</strong> Each piece of data should have one authoritative source. Use @StateObject for view models that own the data, and @ObservedObject for view models passed down from parent views.</div>
+          
+          <div class="body-text"><strong>2. Minimize State:</strong> Keep state as local as possible. Only lift state up when multiple views need to share it.</div>
+          
+          <div class="body-text"><strong>3. Use App State for Global Data:</strong> For truly global state like user authentication or app settings, consider using a dedicated app state object:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+@MainActor<br>
+class AppState: ObservableObject {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var isAuthenticated = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var currentUser: User?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var networkStatus: NetworkStatus = .unknown<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// App-wide actions and state updates<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Code Organization</div>
+        <div class="project-details-content">
+          <div class="body-text">A well-organized codebase is essential for team collaboration and long-term maintainability. Here's the folder structure I recommend:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+YourApp/<br>
+├── App/<br>
+│   ├── YourApp.swift<br>
+│   └── AppState.swift<br>
+├── Core/<br>
+│   ├── DI/<br>
+│   ├── Network/<br>
+│   └── Extensions/<br>
+├── Features/<br>
+│   ├── Authentication/<br>
+│   │   ├── Views/<br>
+│   │   ├── ViewModels/<br>
+│   │   └── Models/<br>
+│   └── UserProfile/<br>
+│       ├── Views/<br>
+│       ├── ViewModels/<br>
+│       └── Models/<br>
+└── Resources/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Assets.xcassets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── Localizable.strings
+          </div>
+          
+          <div class="body-text">This feature-based organization makes it easy to find related code and promotes modularity. Each feature contains its own views, view models, and models, making it easier to reason about and test.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Testing Your Architecture</div>
+        <div class="project-details-content">
+          <div class="body-text">A well-architected SwiftUI app should be easy to test. By using dependency injection and keeping business logic in view models, you can write comprehensive unit tests:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+@MainActor<br>
+class UserProfileViewModelTests: XCTestCase {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testLoadUserSuccess() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let mockService = MockUserService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let viewModel = UserProfileViewModel(userService: mockService)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await viewModel.loadUser(id: "123")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertNotNil(viewModel.user)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertFalse(viewModel.isLoading)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertNil(viewModel.errorMessage)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Conclusion</div>
+        <div class="project-details-content">
+          <div class="body-text">Building scalable SwiftUI architecture requires thoughtful planning and consistent application of best practices. By following MVVM patterns, implementing proper dependency injection, managing state effectively, and organizing your code well, you'll create applications that are maintainable, testable, and enjoyable to work with.</div>
+          
+          <div class="body-text">Remember that architecture should serve your team and project needs. Start simple and evolve your architecture as your application grows. The patterns I've shared here have worked well for medium to large-scale iOS applications, but always consider your specific context and requirements.</div>
+          
+          <div class="body-text">Have questions about SwiftUI architecture? Feel free to reach out – I'd love to discuss these patterns and hear about your experiences building SwiftUI applications.</div>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div style="display: flex; gap: 16px; margin-top: 48px;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">← Back to Blog</span>
+        </a>
+        <a class="button" href="../index.html">
+          <span class="button-text">Portfolio</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+      <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
+        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+      </a>
+      <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
+        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+      </a>
+    </div>
+
+	</body>
+</html>

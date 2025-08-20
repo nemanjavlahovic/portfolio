@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <link rel="icon" href="./assets/images/1311.png" />
+		<title>Nemanja's iOS Portfolio - Blog</title>
+    <meta name="description" content="Blog posts about iOS development, SwiftUI, and mobile app development by Nemanja Vlahovic.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/typography.css">
+    <link rel="stylesheet" href="./css/utilities.css">
+
+		<script defer src="./js/script.js"></script>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="./index.html">
+        <span class="nav-title">Nemanja's iOS Portfolio</span>
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a class="button" href="./blog.html">
+          <span class="button-text">Blog</span>
+        </a>
+        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- BLOG HEADER -->
+      <div id="portfolio-header">
+        <div id="portfolio-header-text-container">
+            <div class="header-text">
+              <span class="main-title">iOS Development Blog</span>
+              <div class="body-text">Insights, tutorials, and thoughts on iOS development, SwiftUI, mobile architecture, and the latest in Apple's ecosystem.</div>
+            </div>
+            <a class="button" href="./index.html">
+              <span class="button-text">Back to Portfolio</span> 
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+        </div>
+      </div>
+
+      <!-- BLOG POSTS SECTION -->
+      <div id="my-work-section">
+        <span class="subheader-text">Latest Posts</span>
+
+        <div class="projects-container">
+          <div class="project-card">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Building Scalable SwiftUI Architecture</div>
+              <div class="body-text project-card-text">How to structure your SwiftUI apps for maintainability and scalability. Learn about MVVM patterns, dependency injection, and state management best practices that I've used in production apps.</div>
+              <div class="image-caption">December 15, 2024</div>
+            </div>
+            <a class="button" href="./blog-posts/swiftui-architecture.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Performance Optimization in iOS Apps</div>
+              <div class="body-text project-card-text">Deep dive into iOS performance optimization techniques. From memory management to smooth animations, learn how to make your apps lightning fast and battery efficient.</div>
+              <div class="image-caption">December 8, 2024</div>
+            </div>
+            <a class="button" href="./blog-posts/ios-performance.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Modern Core Data with SwiftUI</div>
+              <div class="body-text project-card-text">Explore the latest Core Data features and how to integrate them seamlessly with SwiftUI. Learn about @FetchRequest, NSPersistentCloudKitContainer, and data synchronization patterns.</div>
+              <div class="image-caption">November 30, 2024</div>
+            </div>
+            <a class="button" href="./blog-posts/core-data-swiftui.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Unit Testing SwiftUI Views</div>
+              <div class="body-text project-card-text">A comprehensive guide to testing SwiftUI views and view models. Learn testing strategies, mocking techniques, and how to write maintainable tests for your iOS applications.</div>
+              <div class="image-caption">November 22, 2024</div>
+            </div>
+            <a class="button" href="./blog-posts/swiftui-testing.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">iOS 18 New Features for Developers</div>
+              <div class="body-text project-card-text">Discover the latest iOS 18 features that developers should know about. From new APIs to enhanced frameworks, see what's new in Apple's latest mobile operating system.</div>
+              <div class="image-caption">November 15, 2024</div>
+            </div>
+            <a class="button" href="./blog-posts/ios18-features.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-card-text-container">
+              <div class="subheader-text project-title">Async/Await in Swift: Best Practices</div>
+              <div class="body-text project-card-text">Master Swift's concurrency model with async/await. Learn how to write clean, safe, and efficient asynchronous code while avoiding common pitfalls and performance issues.</div>
+              <div class="image-caption">November 8, 2024</div>
+            </div>
+            <a class="button" href="./blog-posts/swift-async-await.html">
+              <span class="button-text">Read More</span>
+              <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+      <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
+        <image src="./assets/icons/linkedin.svg" class="footer-icon"/>
+      </a>
+      <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
+        <image src="./assets/icons/mail.svg" class="footer-icon"/>
+      </a>
+    </div>
+
+	</body>
+</html>

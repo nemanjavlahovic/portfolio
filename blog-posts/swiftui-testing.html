@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <link rel="icon" href="../assets/images/1311.png" />
+		<title>Unit Testing SwiftUI Views - Nemanja's iOS Portfolio</title>
+    <meta name="description" content="A comprehensive guide to testing SwiftUI views and view models with testing strategies, mocking techniques, and maintainable test patterns.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+
+		<script defer src="../js/script.js"></script>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="../index.html">
+        <span class="nav-title">Nemanja's iOS Portfolio</span>
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">Blog</span>
+        </a>
+        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- BLOG POST HEADER -->
+      <div id="project-header">
+        <div class="main-title">Unit Testing SwiftUI Views</div>
+        <div class="body-text">A comprehensive guide to testing SwiftUI views and view models. Learn testing strategies, mocking techniques, and how to write maintainable tests for your iOS applications.</div>
+        <div class="image-caption">Published on November 22, 2024 • 11 min read</div>
+      </div>
+
+      <!-- BLOG POST CONTENT -->
+      <div id="project-details">
+        <div class="subheader-text">Introduction</div>
+        <div class="project-details-content">
+          <div class="body-text">Testing SwiftUI applications presents unique challenges compared to traditional UIKit testing. The declarative nature of SwiftUI views, combined with their reactive state management, requires different testing strategies and tools. However, with proper architecture and testing patterns, you can achieve comprehensive test coverage for your SwiftUI applications.</div>
+          
+          <div class="body-text">In this guide, I'll walk you through effective strategies for testing SwiftUI views, view models, and the interactions between them. These approaches have been refined through testing production SwiftUI applications and provide reliable, maintainable test suites.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Testing Architecture Overview</div>
+        <div class="project-details-content">
+          <div class="body-text">Effective SwiftUI testing requires a clear separation of concerns. The key is to separate business logic from view logic, making each layer independently testable.</div>
+          
+          <div class="body-text"><strong>Testable Architecture Layers:</strong></div>
+          <div class="body-text">• <strong>View Models:</strong> Contains business logic and state management</div>
+          <div class="body-text">• <strong>Views:</strong> Pure SwiftUI views with minimal logic</div>
+          <div class="body-text">• <strong>Services:</strong> Network, persistence, and external dependencies</div>
+          <div class="body-text">• <strong>Models:</strong> Data structures and business entities</div>
+          
+          <div class="body-text">This separation allows you to test business logic in view models independently from UI components, resulting in faster, more reliable tests.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Testing View Models</div>
+        <div class="project-details-content">
+          <div class="body-text">View models contain the majority of your testable business logic. Here's how to structure and test them effectively:</div>
+          
+          <div class="body-text"><strong>Testable View Model Design:</strong></div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+@MainActor<br>
+class TaskListViewModel: ObservableObject {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var tasks: [Task] = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var isLoading = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Published var errorMessage: String?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let taskService: TaskServiceProtocol<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;init(taskService: TaskServiceProtocol) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.taskService = taskService<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func loadTasks() async {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isLoading = true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage = nil<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tasks = try await taskService.fetchTasks()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage = "Failed to load tasks: \(error.localizedDescription)"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isLoading = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func addTask(title: String) async {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let newTask = Task(title: title, isCompleted: false)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tasks.append(newTask)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try await taskService.saveTask(newTask)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Remove from local list if save fails<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tasks.removeAll { $0.id == newTask.id }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage = "Failed to save task: \(error.localizedDescription)"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>Comprehensive View Model Tests:</strong></div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+@MainActor<br>
+class TaskListViewModelTests: XCTestCase {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var viewModel: TaskListViewModel!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var mockTaskService: MockTaskService!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;override func setUp() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.setUp()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mockTaskService = MockTaskService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;viewModel = TaskListViewModel(taskService: mockTaskService)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testLoadTasksSuccess() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let expectedTasks = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task(title: "Task 1", isCompleted: false),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task(title: "Task 2", isCompleted: true)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mockTaskService.tasksToReturn = expectedTasks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await viewModel.loadTasks()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(viewModel.tasks.count, 2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(viewModel.tasks[0].title, "Task 1")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertFalse(viewModel.isLoading)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertNil(viewModel.errorMessage)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testLoadTasksFailure() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mockTaskService.shouldThrowError = true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await viewModel.loadTasks()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertTrue(viewModel.tasks.isEmpty)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertFalse(viewModel.isLoading)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertNotNil(viewModel.errorMessage)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testAddTaskOptimisticUpdate() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let initialCount = viewModel.tasks.count<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await viewModel.addTask(title: "New Task")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(viewModel.tasks.count, initialCount + 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(viewModel.tasks.last?.title, "New Task")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Mock Objects and Test Doubles</div>
+        <div class="project-details-content">
+          <div class="body-text">Effective mocking is crucial for isolated unit tests. Create comprehensive mock objects that can simulate both success and failure scenarios:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class MockTaskService: TaskServiceProtocol {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var tasksToReturn: [Task] = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var shouldThrowError = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var errorToThrow: Error = TestError.generic<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var fetchTasksCallCount = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var saveTaskCallCount = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var lastSavedTask: Task?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func fetchTasks() async throws -> [Task] {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetchTasksCallCount += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if shouldThrowError {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw errorToThrow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Simulate network delay<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return tasksToReturn<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func saveTask(_ task: Task) async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;saveTaskCallCount += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lastSavedTask = task<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if shouldThrowError {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw errorToThrow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func reset() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tasksToReturn = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shouldThrowError = false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetchTasksCallCount = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;saveTaskCallCount = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lastSavedTask = nil<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+<br>
+enum TestError: Error {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case generic<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case networkUnavailable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case unauthorized<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Testing SwiftUI Views</div>
+        <div class="project-details-content">
+          <div class="body-text">While testing SwiftUI views directly is more challenging than testing view models, there are still valuable testing strategies for view logic and integration:</div>
+          
+          <div class="body-text"><strong>1. ViewInspector for View Testing:</strong> Use the ViewInspector library for testing SwiftUI view hierarchies:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+import ViewInspector<br>
+<br>
+class TaskListViewTests: XCTestCase {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testTaskListDisplaysTasks() throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let mockService = MockTaskService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let viewModel = TaskListViewModel(taskService: mockService)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;viewModel.tasks = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task(title: "Test Task 1", isCompleted: false),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task(title: "Test Task 2", isCompleted: true)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let view = TaskListView(viewModel: viewModel)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let list = try view.inspect().find(ViewType.List.self)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(try list.forEach(0).count, 2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testLoadingStateDisplaysProgressView() throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let mockService = MockTaskService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let viewModel = TaskListViewModel(taskService: mockService)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;viewModel.isLoading = true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let view = TaskListView(viewModel: viewModel)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertNoThrow(try view.inspect().find(ViewType.ProgressView.self))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. Integration Tests:</strong> Test the integration between views and view models:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+@MainActor<br>
+class TaskListIntegrationTests: XCTestCase {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func testAddTaskIntegration() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let mockService = MockTaskService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let viewModel = TaskListViewModel(taskService: mockService)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await viewModel.addTask(title: "Integration Test Task")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(mockService.saveTaskCallCount, 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(mockService.lastSavedTask?.title, "Integration Test Task")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(viewModel.tasks.count, 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Testing Async Operations</div>
+        <div class="project-details-content">
+          <div class="body-text">SwiftUI applications heavily use async/await patterns. Here's how to test asynchronous operations effectively:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+func testLoadingStatesWithAsync() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;let expectation = XCTestExpectation(description: "Loading state changes")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var loadingStates: [Bool] = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;let cancellable = viewModel.$isLoading<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.sink { isLoading in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loadingStates.append(isLoading)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if loadingStates.count == 3 { // initial, true, false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expectation.fulfill()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;await viewModel.loadTasks()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;await fulfillment(of: [expectation], timeout: 2.0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(loadingStates, [false, true, false])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cancellable.cancel()<br>
+}<br>
+<br>
+func testConcurrentOperations() async throws {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;let taskTitles = ["Task 1", "Task 2", "Task 3"]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// When<br>
+&nbsp;&nbsp;&nbsp;&nbsp;await withTaskGroup(of: Void.self) { group in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for title in taskTitles {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group.addTask {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await self.viewModel.addTask(title: title)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(viewModel.tasks.count, 3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;XCTAssertEqual(mockTaskService.saveTaskCallCount, 3)<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Test Organization and Best Practices</div>
+        <div class="project-details-content">
+          <div class="body-text"><strong>1. Arrange-Act-Assert Pattern:</strong> Structure your tests clearly with Given-When-Then comments or explicit sections.</div>
+          
+          <div class="body-text"><strong>2. Test Isolation:</strong> Ensure each test is independent and can run in any order:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+override func setUp() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super.setUp()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mockTaskService = MockTaskService()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;viewModel = TaskListViewModel(taskService: mockTaskService)<br>
+}<br>
+<br>
+override func tearDown() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;viewModel = nil<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mockTaskService = nil<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super.tearDown()<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>3. Meaningful Test Names:</strong> Use descriptive test names that explain the scenario and expected outcome:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+// Good: Descriptive and specific<br>
+func testLoadTasks_WhenServiceReturnsError_SetsErrorMessageAndClearsLoading()<br>
+<br>
+// Bad: Vague and unhelpful<br>
+func testLoadTasks()<br>
+func testError()
+          </div>
+          
+          <div class="body-text"><strong>4. Test Data Builders:</strong> Create helper methods for generating test data:</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+extension Task {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static func testTask(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: String = "Test Task",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isCompleted: Bool = false,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdDate: Date = Date()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;) -> Task {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task(title: title, isCompleted: isCompleted, createdDate: createdDate)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static func testTasks(count: Int = 3) -> [Task] {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1...count).map { testTask(title: "Test Task \($0)") }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Conclusion</div>
+        <div class="project-details-content">
+          <div class="body-text">Testing SwiftUI applications requires a thoughtful approach that separates concerns and focuses on testable business logic. By following the patterns outlined in this guide—comprehensive view model testing, effective mocking strategies, and proper test organization—you can build robust test suites that give you confidence in your SwiftUI applications.</div>
+          
+          <div class="body-text">Remember that the goal of testing is not just code coverage, but confidence in your application's behavior. Focus on testing the critical paths and business logic that users depend on. Start with view model tests, as they provide the most value, then add integration tests and view tests as needed.</div>
+          
+          <div class="body-text">Consistent testing practices will save you time in the long run, catch regressions early, and make your code more maintainable. Invest in your testing infrastructure early, and your future self will thank you.</div>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div style="display: flex; gap: 16px; margin-top: 48px;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">← Back to Blog</span>
+        </a>
+        <a class="button" href="../index.html">
+          <span class="button-text">Portfolio</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+      <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
+        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+      </a>
+      <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
+        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+      </a>
+    </div>
+
+	</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <link rel="icon" href="../assets/images/1311.png" />
+		<title>Performance Optimization in iOS Apps - Nemanja's iOS Portfolio</title>
+    <meta name="description" content="Deep dive into iOS performance optimization techniques for memory management, smooth animations, and battery efficiency.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+
+		<script defer src="../js/script.js"></script>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="../index.html">
+        <span class="nav-title">Nemanja's iOS Portfolio</span>
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">Blog</span>
+        </a>
+        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- BLOG POST HEADER -->
+      <div id="project-header">
+        <div class="main-title">Performance Optimization in iOS Apps</div>
+        <div class="body-text">Deep dive into iOS performance optimization techniques. From memory management to smooth animations, learn how to make your apps lightning fast and battery efficient.</div>
+        <div class="image-caption">Published on December 8, 2024 • 10 min read</div>
+      </div>
+
+      <!-- BLOG POST CONTENT -->
+      <div id="project-details">
+        <div class="subheader-text">Introduction</div>
+        <div class="project-details-content">
+          <div class="body-text">Performance optimization is crucial for creating iOS apps that users love. Slow, laggy, or battery-draining apps quickly lose users, regardless of their functionality. Through years of optimizing production iOS applications, I've learned that performance isn't just about raw speed—it's about creating a smooth, responsive user experience that feels natural.</div>
+          
+          <div class="body-text">In this comprehensive guide, I'll share the performance optimization techniques that have proven most effective in real-world iOS applications. We'll cover memory management, rendering optimization, network efficiency, and battery preservation strategies.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Memory Management Best Practices</div>
+        <div class="project-details-content">
+          <div class="body-text">Effective memory management is the foundation of good iOS performance. Even with ARC (Automatic Reference Counting), memory issues can still cause crashes and poor performance.</div>
+          
+          <div class="body-text"><strong>1. Avoid Retain Cycles:</strong> Use weak and unowned references appropriately to break reference cycles, especially in closures and delegate patterns.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class ViewController: UIViewController {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private var networkManager: NetworkManager?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func loadData() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkManager?.fetchData { [weak self] result in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;guard let self = self else { return }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Handle result<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. Image Memory Optimization:</strong> Large images are one of the biggest memory consumers. Always resize images appropriately and use lazy loading for image collections.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+extension UIImage {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func resized(to size: CGSize) -> UIImage? {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let renderer = UIGraphicsImageRenderer(size: size)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return renderer.image { _ in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.draw(in: CGRect(origin: .zero, size: size))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>3. Collection View Memory Management:</strong> Implement proper cell reuse and avoid storing large objects in cells.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Smooth Animations and UI Performance</div>
+        <div class="project-details-content">
+          <div class="body-text">Smooth animations at 60fps (or 120fps on ProMotion displays) are essential for a premium user experience. Here are key strategies:</div>
+          
+          <div class="body-text"><strong>1. Use Core Animation Efficiently:</strong> Animate properties that don't trigger layout passes, such as transform, opacity, and backgroundColor.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+// Preferred: Animates on GPU<br>
+UIView.animate(withDuration: 0.3) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;view.alpha = 0.8<br>
+}<br>
+<br>
+// Avoid: Triggers layout<br>
+UIView.animate(withDuration: 0.3) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;view.frame.size.width += 50 // This is expensive<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. Optimize Table and Collection Views:</strong> Use cell pre-fetching and avoid complex layouts in cells.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+// Enable prefetching<br>
+tableView.prefetchDataSource = self<br>
+<br>
+// Implement prefetching<br>
+func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Preload data for upcoming cells<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for indexPath in indexPaths {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preloadData(for: indexPath)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>3. Use Instruments for Profiling:</strong> Always profile your animations using the Core Animation instrument to identify bottlenecks.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Network Performance Optimization</div>
+        <div class="project-details-content">
+          <div class="body-text">Network operations significantly impact both performance and battery life. Optimizing network usage is crucial for a responsive app experience.</div>
+          
+          <div class="body-text"><strong>1. Implement Smart Caching:</strong> Cache network responses appropriately and use conditional requests to minimize data transfer.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class NetworkManager {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let cache = NSCache&lt;NSString, NSData&gt;()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func fetchData(from url: URL) async throws -> Data {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let cacheKey = url.absoluteString as NSString<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Check cache first<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if let cachedData = cache.object(forKey: cacheKey) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cachedData as Data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Fetch from network<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let (data, _) = try await URLSession.shared.data(from: url)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache.setObject(data as NSData, forKey: cacheKey)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. Batch Network Requests:</strong> Combine multiple API calls when possible to reduce network overhead.</div>
+          
+          <div class="body-text"><strong>3. Use Background App Refresh Wisely:</strong> Only fetch critical data in the background and respect user preferences.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Battery Life Optimization</div>
+        <div class="project-details-content">
+          <div class="body-text">Battery efficiency is increasingly important as users become more conscious of app energy consumption. iOS provides detailed battery usage information, making inefficient apps highly visible to users.</div>
+          
+          <div class="body-text"><strong>1. Optimize Location Services:</strong> Use the most appropriate location accuracy for your needs and stop location services when not needed.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class LocationManager: NSObject, CLLocationManagerDelegate {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private let locationManager = CLLocationManager()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func startLocationTracking() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Use appropriate accuracy for your use case<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locationManager.startUpdatingLocation()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Process location and stop if not needed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.stopUpdatingLocation()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>2. Minimize Background Processing:</strong> Only perform essential work in the background and use background app refresh judiciously.</div>
+          
+          <div class="body-text"><strong>3. Optimize Timer Usage:</strong> Use appropriate timer tolerances and combine timer-based operations when possible.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Performance Monitoring and Measurement</div>
+        <div class="project-details-content">
+          <div class="body-text">Continuous performance monitoring is essential for maintaining app quality. Implement both development-time and production monitoring.</div>
+          
+          <div class="body-text"><strong>1. Use Instruments During Development:</strong> Regular profiling with Time Profiler, Allocations, and Core Animation instruments helps catch issues early.</div>
+          
+          <div class="body-text"><strong>2. Implement Performance Metrics:</strong> Track key performance indicators in production to identify regressions.</div>
+          
+          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+class PerformanceTracker {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static func measureExecutionTime&lt;T&gt;(operation: () throws -> T) rethrows -> (result: T, time: TimeInterval) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let startTime = CFAbsoluteTimeGetCurrent()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let result = try operation()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return (result, timeElapsed)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+          </div>
+          
+          <div class="body-text"><strong>3. Monitor Crashes and ANRs:</strong> Use crash reporting services and monitor Application Not Responding events.</div>
+        </div>
+      </div>
+
+      <div id="project-details">
+        <div class="subheader-text">Conclusion</div>
+        <div class="project-details-content">
+          <div class="body-text">iOS performance optimization is an ongoing process that requires attention to detail and continuous monitoring. The techniques covered in this article—from memory management to battery optimization—form the foundation of creating responsive, efficient iOS applications.</div>
+          
+          <div class="body-text">Remember that performance optimization should be data-driven. Always measure before optimizing, and focus on the areas that provide the most significant impact for your users. Use Instruments regularly during development, and implement monitoring to catch performance regressions early.</div>
+          
+          <div class="body-text">The investment in performance optimization pays dividends in user satisfaction, app store ratings, and long-term app success. Users notice and appreciate apps that are fast, smooth, and respectful of their device's resources.</div>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div style="display: flex; gap: 16px; margin-top: 48px;">
+        <a class="button" href="../blog.html">
+          <span class="button-text">← Back to Blog</span>
+        </a>
+        <a class="button" href="../index.html">
+          <span class="button-text">Portfolio</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+      <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
+        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+      </a>
+      <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
+        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+      </a>
+    </div>
+
+	</body>
+</html>
