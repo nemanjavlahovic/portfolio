@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+     <link rel="icon" href="../assets/images/1311.png" />
+     <title>Nemanja's iOS Portfolio</title>
+    <meta name="description" content="A portfolio of iOS development projects by Nemanja Vlahovic.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+
+		<script defer src="../js/script.js"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      #main-content {
+        flex-grow: 1;
+        padding-top: 0; /* Remove top padding */
+        padding-bottom: 30px;
+      }
+      .navbar {
+        margin-bottom: 0; /* Remove any bottom margin from navbar */
+      }
+      #project-header {
+        margin-top: 15px; /* Add a small top margin to project header */
+        margin-bottom: 15px;
+      }
+      .project-gallery-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+      }
+      .gallery-image-container {
+        flex-basis: calc(25% - 8px);
+        aspect-ratio: 9 / 19.5;
+        overflow: hidden;
+      }
+      .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+    </style>
+	</head>
+	<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="nav-title-link" href="../index.html">
+        <span class="nav-title">Nemanja's iOS Portfolio</span>
+        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
+          <span class="button-text">Contact Me</span>
+        </a>
+      </a>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <div id="main-content">
+
+      <!-- PROJECT HEADER AND DETAILS -->
+      <div id="project-header">
+        <div class="main-title">Promly for High School</div>
+        <div class="subheader-text">Project Details / Background</div>
+        <div class="project-details-content">
+          <div class="body-text">Promly for High School is an innovative social platform specifically designed to address the unique needs of high school students. As a lead iOS developer on this project, I focused on creating a safe, engaging, and supportive digital environment for teens to connect, collaborate, and access vital mental health resources.</div>
+          <div class="body-text">The app features a range of functionalities including peer-to-peer messaging, group discussions, collaborative project spaces, and a curated library of mental health resources. I implemented robust privacy and safety measures to ensure a secure environment for young users. A key challenge was balancing user engagement with digital well-being, incorporating features like usage reminders and mood tracking to promote healthy online habits.</div>
+        </div>
+      </div>
+
+      <!-- IMAGE GALLERY -->
+      <div id="project-gallery">
+        <div class="subheader-text">Image Gallery</div>
+        <div class="project-gallery-content">
+            <div class="gallery-image-container">
+              <img src="../assets/images/promly/screenshot_1.jpg" class="gallery-image">
+            </div>
+            <div class="gallery-image-container">
+              <img src="../assets/images/promly/screenshot_2.jpg" class="gallery-image">
+            </div>
+            <div class="gallery-image-container">
+              <img src="../assets/images/promly/screenshot_3.jpg" class="gallery-image">
+            </div>
+            <div class="gallery-image-container">
+              <img src="../assets/images/promly/screenshot_4.jpg" class="gallery-image">
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+        <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
+          <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+        </a>
+        <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
+          <image src="../assets/icons/mail.svg" class="footer-icon"/>
+        </a>
+      </div>
+
+	</body>
+</html>
