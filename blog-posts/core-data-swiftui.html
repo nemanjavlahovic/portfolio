@@ -54,7 +54,7 @@
         <div class="project-details-content">
           <div class="body-text">Modern Core Data setup emphasizes dependency injection and testability. Here's how to structure your Core Data stack for SwiftUI applications:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class PersistenceController: ObservableObject {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static let shared = PersistenceController()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -87,7 +87,7 @@ class PersistenceController: ObservableObject {<br>
           
           <div class="body-text">Inject the managed object context into your SwiftUI environment:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 @main<br>
 struct MyApp: App {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;let persistenceController = PersistenceController.shared<br>
@@ -110,7 +110,7 @@ struct MyApp: App {<br>
           
           <div class="body-text"><strong>Basic FetchRequest Usage:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct TaskListView: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@FetchRequest(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sortDescriptors: [NSSortDescriptor(keyPath: \Task.createdDate, ascending: false)],<br>
@@ -127,7 +127,7 @@ struct TaskListView: View {<br>
           
           <div class="body-text"><strong>Dynamic FetchRequest:</strong> For more complex scenarios, you can dynamically modify fetch requests:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct FilterableTaskListView: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@State private var showCompleted = false<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@State private var searchText = ""<br>
@@ -174,7 +174,7 @@ struct TaskListView: View {<br>
           
           <div class="body-text"><strong>Setting Up CloudKit:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class CloudKitPersistenceController: ObservableObject {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;lazy var container: NSPersistentCloudKitContainer = {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let container = NSPersistentCloudKitContainer(name: "DataModel")<br>
@@ -202,7 +202,7 @@ class CloudKitPersistenceController: ObservableObject {<br>
           
           <div class="body-text"><strong>Handling CloudKit Sync States:</strong> Provide user feedback for sync operations:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 @MainActor<br>
 class CloudKitSyncMonitor: ObservableObject {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@Published var syncStatus: SyncStatus = .idle<br>
@@ -249,7 +249,7 @@ class CloudKitSyncMonitor: ObservableObject {<br>
           
           <div class="body-text"><strong>Background Context Operations:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 extension PersistenceController {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;func performBackgroundTask&lt;T&gt;(_ block: @escaping (NSManagedObjectContext) throws -> T) async throws -> T {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return try await withCheckedThrowingContinuation { continuation in<br>
@@ -281,7 +281,7 @@ extension PersistenceController {<br>
           
           <div class="body-text"><strong>Batch Operations:</strong> For operations affecting many objects, use batch requests for better performance:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func markAllTasksAsCompleted() async throws {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;try await performBackgroundTask { context in<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let batchUpdateRequest = NSBatchUpdateRequest(entityName: "Task")<br>
@@ -306,7 +306,7 @@ func markAllTasksAsCompleted() async throws {<br>
         <div class="project-details-content">
           <div class="body-text">Testing Core Data requires careful setup of in-memory stores and proper context management. Here's how to create testable Core Data code:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 extension PersistenceController {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static var preview: PersistenceController = {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let controller = PersistenceController(inMemory: true)<br>
@@ -366,10 +366,10 @@ extension PersistenceController {<br>
     <!-- FOOTER -->
     <div id="footer">
       <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
-        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+        <img src="../assets/icons/linkedin.svg" class="footer-icon" alt="LinkedIn icon"/>
       </a>
       <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
-        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+        <img src="../assets/icons/mail.svg" class="footer-icon" alt="Email icon"/>
       </a>
     </div>
 

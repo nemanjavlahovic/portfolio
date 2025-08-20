@@ -71,7 +71,7 @@
           
           <div class="body-text"><strong>Testable View Model Design:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 @MainActor<br>
 class TaskListViewModel: ObservableObject {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@Published var tasks: [Task] = []<br>
@@ -114,7 +114,7 @@ class TaskListViewModel: ObservableObject {<br>
           
           <div class="body-text"><strong>Comprehensive View Model Tests:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 @MainActor<br>
 class TaskListViewModelTests: XCTestCase {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var viewModel: TaskListViewModel!<br>
@@ -178,7 +178,7 @@ class TaskListViewModelTests: XCTestCase {<br>
         <div class="project-details-content">
           <div class="body-text">Effective mocking is crucial for isolated unit tests. Create comprehensive mock objects that can simulate both success and failure scenarios:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class MockTaskService: TaskServiceProtocol {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var tasksToReturn: [Task] = []<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var shouldThrowError = false<br>
@@ -234,7 +234,7 @@ enum TestError: Error {<br>
           
           <div class="body-text"><strong>1. ViewInspector for View Testing:</strong> Use the ViewInspector library for testing SwiftUI view hierarchies:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 import ViewInspector<br>
 <br>
 class TaskListViewTests: XCTestCase {<br>
@@ -272,7 +272,7 @@ class TaskListViewTests: XCTestCase {<br>
           
           <div class="body-text"><strong>2. Integration Tests:</strong> Test the integration between views and view models:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 @MainActor<br>
 class TaskListIntegrationTests: XCTestCase {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;func testAddTaskIntegration() async throws {<br>
@@ -298,7 +298,7 @@ class TaskListIntegrationTests: XCTestCase {<br>
         <div class="project-details-content">
           <div class="body-text">SwiftUI applications heavily use async/await patterns. Here's how to test asynchronous operations effectively:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func testLoadingStatesWithAsync() async throws {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;// Given<br>
 &nbsp;&nbsp;&nbsp;&nbsp;let expectation = XCTestExpectation(description: "Loading state changes")<br>
@@ -349,7 +349,7 @@ func testConcurrentOperations() async throws {<br>
           
           <div class="body-text"><strong>2. Test Isolation:</strong> Ensure each test is independent and can run in any order:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 override func setUp() {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;super.setUp()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;mockTaskService = MockTaskService()<br>
@@ -365,7 +365,7 @@ override func tearDown() {<br>
           
           <div class="body-text"><strong>3. Meaningful Test Names:</strong> Use descriptive test names that explain the scenario and expected outcome:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // Good: Descriptive and specific<br>
 func testLoadTasks_WhenServiceReturnsError_SetsErrorMessageAndClearsLoading()<br>
 <br>
@@ -376,7 +376,7 @@ func testError()
           
           <div class="body-text"><strong>4. Test Data Builders:</strong> Create helper methods for generating test data:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 extension Task {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static func testTask(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: String = "Test Task",<br>
@@ -419,10 +419,10 @@ extension Task {<br>
     <!-- FOOTER -->
     <div id="footer">
       <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
-        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+        <img src="../assets/icons/linkedin.svg" class="footer-icon" alt="LinkedIn icon"/>
       </a>
       <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
-        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+        <img src="../assets/icons/mail.svg" class="footer-icon" alt="Email icon"/>
       </a>
     </div>
 

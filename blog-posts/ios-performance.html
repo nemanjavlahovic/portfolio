@@ -56,7 +56,7 @@
           
           <div class="body-text"><strong>1. Avoid Retain Cycles:</strong> Use weak and unowned references appropriately to break reference cycles, especially in closures and delegate patterns.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class ViewController: UIViewController {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;private var networkManager: NetworkManager?<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -71,7 +71,7 @@ class ViewController: UIViewController {<br>
           
           <div class="body-text"><strong>2. Image Memory Optimization:</strong> Large images are one of the biggest memory consumers. Always resize images appropriately and use lazy loading for image collections.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 extension UIImage {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;func resized(to size: CGSize) -> UIImage? {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let renderer = UIGraphicsImageRenderer(size: size)<br>
@@ -93,7 +93,7 @@ extension UIImage {<br>
           
           <div class="body-text"><strong>1. Use Core Animation Efficiently:</strong> Animate properties that don't trigger layout passes, such as transform, opacity, and backgroundColor.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // Preferred: Animates on GPU<br>
 UIView.animate(withDuration: 0.3) {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)<br>
@@ -108,7 +108,7 @@ UIView.animate(withDuration: 0.3) {<br>
           
           <div class="body-text"><strong>2. Optimize Table and Collection Views:</strong> Use cell pre-fetching and avoid complex layouts in cells.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // Enable prefetching<br>
 tableView.prefetchDataSource = self<br>
 <br>
@@ -132,7 +132,7 @@ func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath])
           
           <div class="body-text"><strong>1. Implement Smart Caching:</strong> Cache network responses appropriately and use conditional requests to minimize data transfer.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class NetworkManager {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;private let cache = NSCache&lt;NSString, NSData&gt;()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -165,7 +165,7 @@ class NetworkManager {<br>
           
           <div class="body-text"><strong>1. Optimize Location Services:</strong> Use the most appropriate location accuracy for your needs and stop location services when not needed.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class LocationManager: NSObject, CLLocationManagerDelegate {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;private let locationManager = CLLocationManager()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -197,7 +197,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {<br>
           
           <div class="body-text"><strong>2. Implement Performance Metrics:</strong> Track key performance indicators in production to identify regressions.</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class PerformanceTracker {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static func measureExecutionTime&lt;T&gt;(operation: () throws -> T) rethrows -> (result: T, time: TimeInterval) {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let startTime = CFAbsoluteTimeGetCurrent()<br>
@@ -237,10 +237,10 @@ class PerformanceTracker {<br>
     <!-- FOOTER -->
     <div id="footer">
       <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
-        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+        <img src="../assets/icons/linkedin.svg" class="footer-icon" alt="LinkedIn icon"/>
       </a>
       <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
-        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+        <img src="../assets/icons/mail.svg" class="footer-icon" alt="Email icon"/>
       </a>
     </div>
 

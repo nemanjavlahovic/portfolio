@@ -98,9 +98,26 @@ a.no-underline:hover {
   cursor: pointer;
 }
 
+/* Code Block Styling */
+
+.code-block {
+  background-color: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  margin: 20px 0;
+  line-height: 1.4;
+  overflow-x: auto;
+}
+
 /* Small devices (portrait tablets and large phones, 800px and below) */
 @media only screen and (max-width: 800px) {
   #footer {
     padding: 20px 20px;
+  }
+
+  .code-block {
+    padding: 12px;
+    font-size: 14px;
   }
 }

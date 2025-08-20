@@ -46,6 +46,8 @@
           <div class="body-text">iOS 18 brings significant enhancements for developers, introducing new frameworks, APIs, and capabilities that enable more powerful and engaging applications. From advanced SwiftUI features to improved system integrations, this release focuses on giving developers more tools to create exceptional user experiences.</div>
           
           <div class="body-text">In this comprehensive overview, I'll walk you through the most important iOS 18 features for developers, including practical examples and implementation guidance. These features represent opportunities to enhance your apps and take advantage of the latest iOS capabilities.</div>
+          
+          <div class="body-text"><strong>Note:</strong> Some specific APIs and implementation details may vary from the final iOS 18 release. Always refer to the official Apple documentation and Xcode beta releases for the most up-to-date information.</div>
         </div>
       </div>
 
@@ -56,7 +58,7 @@
           
           <div class="body-text"><strong>1. Mesh Gradients:</strong> Create stunning visual effects with new mesh gradient capabilities:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct MeshGradientView: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var body: some View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MeshGradient(<br>
@@ -80,7 +82,7 @@ struct MeshGradientView: View {<br>
           
           <div class="body-text"><strong>2. Scrolling Enhancements:</strong> New scroll view capabilities with scroll position tracking and custom scroll targets:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct ScrollPositionDemo: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@State private var scrollPosition: Int? = 0<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -111,7 +113,7 @@ struct ScrollPositionDemo: View {<br>
           
           <div class="body-text"><strong>3. Custom Containers:</strong> Build custom container views with proper SwiftUI integration:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct CustomContainer&lt;Content: View&gt;: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@ViewBuilder let content: () -> Content<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -135,7 +137,7 @@ struct CustomContainer&lt;Content: View&gt;: View {<br>
           
           <div class="body-text"><strong>Enhanced Siri Integration:</strong> Create more natural and context-aware Siri experiences:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct CreateTaskIntent: AppIntent {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static var title: LocalizedStringResource = "Create Task"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static var description = IntentDescription("Creates a new task in your task list")<br>
@@ -167,7 +169,7 @@ struct CreateTaskIntent: AppIntent {<br>
           
           <div class="body-text"><strong>Smart Parameters:</strong> Use dynamic options and validation for better user experiences:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 enum TaskPriority: String, AppEnum {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;case low = "low"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;case medium = "medium"<br>
@@ -194,7 +196,7 @@ enum TaskPriority: String, AppEnum {<br>
           
           <div class="body-text"><strong>Creating Control Center Widgets:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct FlashlightControlWidget: ControlWidget {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;static let kind: String = "FlashlightControl"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -219,7 +221,7 @@ struct FlashlightControlWidget: ControlWidget {<br>
           
           <div class="body-text"><strong>Interactive Controls:</strong> Create controls with multiple interaction types:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct VolumeControlWidget: ControlWidget {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var body: some ControlWidgetConfiguration {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StaticControlConfiguration(<br>
@@ -248,7 +250,7 @@ struct VolumeControlWidget: ControlWidget {<br>
           
           <div class="body-text"><strong>1. Automatic Permission Requests:</strong> More intelligent permission timing based on user context:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;private let locationManager = CLLocationManager()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@Published var authorizationStatus: CLAuthorizationStatus = .notDetermined<br>
@@ -269,9 +271,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {<b
 }
           </div>
           
-          <div class="body-text"><strong>2. App Privacy Report Integration:</strong> Provide transparency about data usage:</div>
+          <div class="body-text"><strong>2. Enhanced Privacy Controls:</strong> Improved privacy transparency and user control:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // Privacy manifest updates<br>
 // PrivacyInfo.xcprivacy<br>
 {<br>
@@ -297,7 +299,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {<b
           
           <div class="body-text"><strong>Persistent History Improvements:</strong> Better tracking and management of data changes:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class CoreDataManager {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;private let container: NSPersistentContainer<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -333,7 +335,7 @@ class CoreDataManager {<br>
           
           <div class="body-text"><strong>MetalFX Integration:</strong> Enhanced upscaling and rendering techniques:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 import MetalFX<br>
 <br>
 class MetalRenderer {<br>
@@ -373,7 +375,7 @@ class MetalRenderer {<br>
           
           <div class="body-text"><strong>Feature Detection and Graceful Degradation:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct AdaptiveFeatureView: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var body: some View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if #available(iOS 18.0, *) {<br>
@@ -424,10 +426,10 @@ struct AdaptiveFeatureView: View {<br>
     <!-- FOOTER -->
     <div id="footer">
       <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
-        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+        <img src="../assets/icons/linkedin.svg" class="footer-icon" alt="LinkedIn icon"/>
       </a>
       <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
-        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+        <img src="../assets/icons/mail.svg" class="footer-icon" alt="Email icon"/>
       </a>
     </div>
 

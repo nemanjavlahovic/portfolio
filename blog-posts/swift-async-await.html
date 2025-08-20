@@ -56,7 +56,7 @@
           
           <div class="body-text"><strong>Basic Async Function:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // Traditional completion handler approach<br>
 func fetchUser(id: String, completion: @escaping (Result&lt;User, Error&gt;) -> Void) {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;URLSession.shared.dataTask(with: URL(string: "api/users/\(id)")!) { data, response, error in<br>
@@ -98,7 +98,7 @@ func fetchUser(id: String) async throws -> User {<br>
           
           <div class="body-text"><strong>1. TaskGroup for Parallel Operations:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func fetchMultipleUsers(ids: [String]) async throws -> [User] {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return try await withThrowingTaskGroup(of: User.self) { group in<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Add tasks for each user ID<br>
@@ -141,7 +141,7 @@ func fetchUsersStreamingResults(ids: [String]) async throws -> [User] {<br>
           
           <div class="body-text"><strong>2. Sequential Operations with Dependencies:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func setupUserProfile(userId: String) async throws -> UserProfile {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;// Step 1: Fetch user data<br>
 &nbsp;&nbsp;&nbsp;&nbsp;let user = try await fetchUser(id: userId)<br>
@@ -176,7 +176,7 @@ func setupUserProfile(userId: String) async throws -> UserProfile {<br>
           
           <div class="body-text"><strong>1. Graceful Error Recovery:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func fetchUserWithFallback(id: String) async -> User? {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;do {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Try primary data source<br>
@@ -221,7 +221,7 @@ func fetchUsersWithPartialFailure(ids: [String]) async -> [User] {<br>
           
           <div class="body-text"><strong>2. Custom Error Types:</strong> Create meaningful error types for better error handling:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 enum APIError: Error, LocalizedError {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;case invalidURL<br>
 &nbsp;&nbsp;&nbsp;&nbsp;case noData<br>
@@ -255,7 +255,7 @@ enum APIError: Error, LocalizedError {<br>
           
           <div class="body-text"><strong>1. Task Cancellation Patterns:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 class DataManager: ObservableObject {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@Published var users: [User] = []<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@Published var isLoading = false<br>
@@ -299,7 +299,7 @@ class DataManager: ObservableObject {<br>
           
           <div class="body-text"><strong>2. Cooperative Cancellation:</strong> Check for cancellation in long-running operations:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func processLargeDataset(_ items: [DataItem]) async throws -> [ProcessedItem] {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;var processedItems: [ProcessedItem] = []<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -331,7 +331,7 @@ func processLargeDataset(_ items: [DataItem]) async throws -> [ProcessedItem] {<
           
           <div class="body-text"><strong>1. Efficient Batch Processing:</strong></div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 func processBatchesEfficiently&lt;T, R&gt;(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;items: [T],<br>
 &nbsp;&nbsp;&nbsp;&nbsp;batchSize: Int = 10,<br>
@@ -378,7 +378,7 @@ func processBatchesEfficiently&lt;T, R&gt;(<br>
           
           <div class="body-text"><strong>2. Memory-Efficient Streaming:</strong> Process large datasets without loading everything into memory:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct DataStream: AsyncSequence {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;typealias Element = DataItem<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -429,7 +429,7 @@ func processDataStream() async throws {<br>
         <div class="project-details-content">
           <div class="body-text">Integrating async/await with SwiftUI requires careful attention to main actor isolation and proper task lifecycle management:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 struct UserListView: View {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@StateObject private var viewModel = UserListViewModel()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -491,7 +491,7 @@ class UserListViewModel: ObservableObject {<br>
         <div class="project-details-content">
           <div class="body-text"><strong>1. Avoiding Blocking the Main Thread:</strong> Always use @MainActor for UI updates and avoid synchronous blocking operations:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // ❌ Bad: Blocking main thread<br>
 func updateUI() {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;DispatchQueue.main.sync {<br>
@@ -509,7 +509,7 @@ func updateUI() async {<br>
           
           <div class="body-text"><strong>2. Proper Task Cleanup:</strong> Always clean up tasks to prevent memory leaks:</div>
           
-          <div class="body-text" style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; margin: 20px 0;">
+          <div class="body-text code-block">
 // ❌ Bad: Task not cleaned up<br>
 class BadViewController: UIViewController {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;override func viewDidLoad() {<br>
@@ -572,10 +572,10 @@ class GoodViewController: UIViewController {<br>
     <!-- FOOTER -->
     <div id="footer">
       <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
-        <image src="../assets/icons/linkedin.svg" class="footer-icon"/>
+        <img src="../assets/icons/linkedin.svg" class="footer-icon" alt="LinkedIn icon"/>
       </a>
       <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
-        <image src="../assets/icons/mail.svg" class="footer-icon"/>
+        <img src="../assets/icons/mail.svg" class="footer-icon" alt="Email icon"/>
       </a>
     </div>
 
