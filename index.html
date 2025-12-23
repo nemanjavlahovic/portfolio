@@ -2,259 +2,448 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<link rel="icon" href="./assets/images/1311.webp" />
+		<title>Nemanja Vlahovic - Senior iOS Developer | SwiftUI & UIKit Expert</title>
+		<meta name="description" content="Senior iOS developer with 8+ years of experience building native applications. Specializing in SwiftUI, UIKit, and scalable mobile architecture for startups and enterprises.">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="keywords" content="iOS developer, Swift, SwiftUI, UIKit, mobile development, Barcelona, freelance iOS, app development">
+		<meta name="author" content="Nemanja Vlahovic">
+		<meta name="robots" content="index, follow">
+		<link rel="canonical" href="https://nemanjavlahovic.com/">
 
-    <link rel="icon" href="./assets/images/1311.png" />
-		<title>Nemanja's iOS Portfolio</title>
-    <meta name="description" content="A portfolio showcasing iOS development projects by Nemanja Vlahovic, an experienced iOS developer with 8 years of expertise.">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://nemanjavlahovic.com/">
+		<meta property="og:title" content="Nemanja Vlahovic - Senior iOS Developer">
+		<meta property="og:description" content="Senior iOS developer with 8+ years of experience. Specializing in SwiftUI, UIKit, and scalable mobile architecture.">
+		<meta property="og:image" content="https://nemanjavlahovic.com/assets/images/1311.png">
+		<meta property="og:image:width" content="600">
+		<meta property="og:image:height" content="600">
+		<meta property="og:site_name" content="Nemanja's iOS Portfolio">
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:url" content="https://nemanjavlahovic.com/">
+		<meta name="twitter:title" content="Nemanja Vlahovic - Senior iOS Developer">
+		<meta name="twitter:description" content="Senior iOS developer with 8+ years of experience. Specializing in SwiftUI, UIKit, and scalable mobile architecture.">
+		<meta name="twitter:image" content="https://nemanjavlahovic.com/assets/images/1311.png">
+
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Nemanja Vlahovic",
+			"jobTitle": "Senior iOS Developer",
+			"description": "Senior iOS developer with 8+ years of experience building native applications for startups and enterprises.",
+			"url": "https://nemanjavlahovic.com",
+			"image": "https://nemanjavlahovic.com/assets/images/1311.png",
+			"email": "nemanja@nemanjavlahovic.com",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Barcelona",
+				"addressCountry": "Spain"
+			},
+			"sameAs": [
+				"https://github.com/nemanjavlahovic",
+				"https://www.linkedin.com/in/nemanja-vlahovic/"
+			],
+			"knowsAbout": ["iOS Development", "Swift", "SwiftUI", "UIKit", "Mobile Architecture", "Firebase", "REST APIs"]
+		}
+		</script>
+
+		<!-- Theme Color -->
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+		<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 
 		<link rel="stylesheet" href="./css/layout.css">
-    <link rel="stylesheet" href="./css/typography.css">
-    <link rel="stylesheet" href="./css/utilities.css">
+		<link rel="stylesheet" href="./css/typography.css">
+		<link rel="stylesheet" href="./css/utilities.css">
 
 		<script defer src="./js/script.js"></script>
+
+		<!-- Plausible Analytics -->
+		<script defer data-domain="nemanjavlahovic.com" src="https://plausible.io/js/script.js"></script>
 	</head>
 	<body>
-    <!-- NAVBAR -->
-    <div class="navbar">
-      <a class="nav-title-link" href="./index.html">
-        <span class="nav-title">Nemanja's iOS Portfolio</span>
-      </a>
-      <div style="display: flex; gap: 16px; align-items: center;">
-        <!-- Blog feature - uncomment when ready to launch -->
-        <!-- <a class="button" href="./blog.html">
-          <span class="button-text">Blog</span>
-        </a> -->
-        <a class="button" href="mailto:nemanja@nemanjavlahovic.com">
-          <span class="button-text">Contact Me</span>
-        </a>
-      </div>
-    </div>
+		<!-- Skip to main content for accessibility -->
+		<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- MAIN PAGE CONTENT -->
-    <div id="main-content">
+		<!-- NAVBAR -->
+		<nav class="navbar" role="navigation" aria-label="Main navigation">
+			<a class="nav-title-link" href="./index.html" aria-label="Home">
+				<span class="nav-title">Nemanja's iOS Portfolio</span>
+			</a>
+			<div class="nav-links">
+				<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+					<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+					<svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+				</button>
+				<!-- Blog disabled - uncomment when ready
+				<a class="button" href="./blog.html">
+					<span class="button-text">Blog</span>
+				</a>
+				-->
+				<a class="button" href="#contact" aria-label="Contact me">
+					<span class="button-text">Contact Me</span>
+				</a>
+			</div>
+		</nav>
 
-      <!-- PORTFOLIO HEADER -->
-      <div id="portfolio-header">
-        <div id="portfolio-header-image-container">
-          <img src="./assets/images/1311.png" class="portfolio-header-image">
-          <a class="no-underline" target="_blank" href="https://opensea.io/assets/0xe0be388ab81c47b0f098d2030a1c9ef190691a8a/1311">
-            <span class="image-caption">Profile Image #1311</span>
-          </a>
-        </div>
+		<!-- MAIN PAGE CONTENT -->
+		<main id="main-content">
 
-        <div id="portfolio-header-text-container">
-            <div class="header-text">
-              <span class="main-title">Hey, I'm Nemanja 👋</span>
-              <div class="body-text">iOS developer based in Barcelona ☀️. I've spent 8 years crafting mobile experiences with SwiftUI and UIKit that users actually enjoy using.</div>
-            </div>
-            <a class="button" id="my-work-link">
-              <span class="button-text">Check out my projects</span> 
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-        </div>
-      </div>
+			<!-- PORTFOLIO HEADER -->
+			<header id="portfolio-header">
+				<div id="portfolio-header-image-container">
+					<picture>
+						<source srcset="./assets/images/1311.webp" type="image/webp">
+						<img src="./assets/images/1311.png" class="portfolio-header-image" alt="Nemanja Vlahovic profile picture" width="600" height="600">
+					</picture>
+					<a class="no-underline" target="_blank" href="https://opensea.io/assets/0xe0be388ab81c47b0f098d2030a1c9ef190691a8a/1311" rel="noopener noreferrer">
+						<span class="image-caption">Profile Image #1311</span>
+					</a>
+				</div>
 
-      <!-- ABOUT SECTION -->
-      <div id="about-section">
-        <span class="subheader-text">My Background / About Me</span>
-        <div class="about-section-content">
-          <div class="body-text">I'm a senior iOS developer based in Barcelona with 8+ years of experience building native applications for startups and enterprises. My work spans healthcare, transportation, and social platforms, with a focus on creating performant, maintainable codebases that scale.</div>
-          <div class="body-text">I specialize in Swift, SwiftUI, and UIKit, with extensive experience in complex UI implementations, API integrations, and app architecture. I've led development on apps serving millions of users, optimized legacy codebases, and built MVPs from scratch. Beyond iOS, I work with Firebase, REST APIs, and have a solid understanding of backend integration patterns.</div>
-          <div class="body-text">I value direct communication, clean code, and shipping quality products on time. Whether you need to build a new product, scale an existing app, or modernize your iOS codebase, I can help you deliver a solution that works for both your users and your business.</div>
-        </div>
-      </div>
+				<div id="portfolio-header-text-container">
+					<div class="header-text">
+						<h1 class="main-title">Hey, I'm Nemanja</h1>
+						<p class="body-text">iOS developer based in Barcelona. I've spent 8 years crafting mobile experiences with SwiftUI and UIKit that users actually enjoy using.</p>
+					</div>
+					<a class="button" id="my-work-link" href="#my-work-section" aria-label="View my projects">
+						<span class="button-text">Check out my projects</span>
+						<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+					</a>
+				</div>
+			</header>
 
-      <!-- PROJECTS / MY WORK SECTION -->
-      <div id="my-work-section">
-        <!-- CONTRACT WORK -->
-        <span class="subheader-text">Contract Work</span>
-        <div class="body-text" style="margin-bottom: 40px;">Selected client projects from my iOS contracting work with startups and enterprises.</div>
-        
-        <div class="projects-container">
-          <div class="project-card">
-            <img src="./assets/images/calendly/screenshot_1.png" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">Calendly Mobile</div>
-              <div class="body-text project-card-text"><strong>Short-term Contract</strong> • Implemented "Schedule in Real Time" feature with calendar API integration and performance optimization.</div>
-            </div>
-            <a class="button" href="./project-pages/calendly.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
+			<!-- WHAT I DO SECTION -->
+			<section id="services-section" aria-labelledby="services-heading">
+				<h2 class="subheader-text" id="services-heading">What I Do</h2>
+				<div class="services-grid">
+					<div class="service-card">
+						<div class="service-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+						</div>
+						<h3 class="service-title">iOS App Development</h3>
+						<p class="body-text">Native iOS applications built with Swift, SwiftUI, and UIKit. From MVPs to enterprise-scale apps serving millions of users.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+						</div>
+						<h3 class="service-title">Architecture & Code Quality</h3>
+						<p class="body-text">Clean, maintainable codebases with MVVM, dependency injection, and comprehensive testing. I build apps that scale.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+						</div>
+						<h3 class="service-title">Performance Optimization</h3>
+						<p class="body-text">Profiling, memory management, and optimization to ensure smooth animations and battery-efficient apps.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+						</div>
+						<h3 class="service-title">Legacy Modernization</h3>
+						<p class="body-text">UIKit to SwiftUI migrations, Objective-C to Swift conversions, and architecture refactoring for aging codebases.</p>
+					</div>
+				</div>
+			</section>
 
-          <div class="project-card">
-            <img src="./assets/images/cargo/screenshot_1.png" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">Car:Go Anywhere</div>
-              <div class="body-text project-card-text"><strong>Lead iOS Developer (Full-time)</strong> • Belgrade's Uber alternative serving 50k+ users. Led complete app overhaul and architecture redesign.</div>
-            </div>
-            <a class="button" href="./project-pages/cargo.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
+			<!-- ABOUT SECTION -->
+			<section id="about-section" aria-labelledby="about-heading">
+				<h2 class="subheader-text" id="about-heading">My Background</h2>
+				<div class="about-section-content">
+					<p class="body-text">I'm a senior iOS developer based in Barcelona with 8+ years of experience building native applications for startups and enterprises. My work spans healthcare, transportation, and social platforms, with a focus on creating performant, maintainable codebases that scale.</p>
+					<p class="body-text">I specialize in Swift, SwiftUI, and UIKit, with extensive experience in complex UI implementations, API integrations, and app architecture. I've led development on apps serving millions of users, optimized legacy codebases, and built MVPs from scratch.</p>
+					<p class="body-text">I value direct communication, clean code, and shipping quality products on time. Whether you need to build a new product, scale an existing app, or modernize your iOS codebase, I can help you deliver a solution that works for both your users and your business.</p>
+				</div>
+			</section>
 
-          <div class="project-card">
-            <img src="./assets/images/cub/screenshot_1.png" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">Cub: Self-Care Pet</div>
-              <div class="body-text project-card-text">A unique self-care app that gamifies your daily routines. Care for your virtual pet by completing real-life tasks and building healthy habits.</div>
-            </div>
-            <a class="button" href="./project-pages/cub.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
+			<!-- PROJECTS / MY WORK SECTION -->
+			<section id="my-work-section" aria-labelledby="projects-heading">
+				<!-- PROJECT FILTERS -->
+				<div class="project-filters" role="tablist" aria-label="Project categories">
+					<button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">All Projects</button>
+					<button class="filter-btn" role="tab" aria-selected="false" data-filter="contract">Contract Work</button>
+					<button class="filter-btn" role="tab" aria-selected="false" data-filter="opensource">Open Source</button>
+					<button class="filter-btn" role="tab" aria-selected="false" data-filter="indie">Indie Projects</button>
+				</div>
 
-          <div class="project-card">
-            <img src="./assets/images/hapticlabs/screenshot_1.jpg" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">HapticLabs Player</div>
-              <div class="body-text project-card-text">Experience music in a new dimension with haptic feedback. This innovative player syncs vibrations with your favorite tunes for an immersive listening experience.</div>
-            </div>
-            <a class="button" href="./project-pages/hapticlabs.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
+				<!-- CONTRACT WORK -->
+				<div class="project-category" data-category="contract">
+					<h2 class="subheader-text" id="projects-heading">Contract Work</h2>
+					<p class="body-text category-description">Selected client projects from my iOS contracting work with startups and enterprises.</p>
 
-          <div class="project-card">
-            <img src="./assets/images/included/screenshot_1.png" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">Included Health</div>
-              <div class="body-text project-card-text"><strong>Contract via Vicert</strong> • Healthcare platform refactoring. Led UIKit to SwiftUI migration following company merger.</div>
-            </div>
-            <a class="button" href="./project-pages/included.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
+					<div class="projects-container">
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/circlin/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/circlin/screenshot_1.webp" class="project-image" alt="Circlin marketplace app screenshot" loading="lazy" width="1290" height="2796">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Circlin: Buy & Sell Fashion</h3>
+								<p class="body-text project-card-text"><strong>iOS Architect & Backend (Contract)</strong> - Video-first marketplace for pre-loved fashion. Architected iOS app and built GraphQL backend services.</p>
+							</div>
+							<a class="button" href="./project-pages/circlin.html" aria-label="Read more about Circlin project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-          <div class="project-card">
-            <img src="./assets/images/meridian/screenshot_1.png" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">Meridian Sport Srbija</div>
-              <div class="body-text project-card-text">Stay up-to-date with the latest sports news, live scores, and in-depth analysis from Serbia and around the world. Customizable notifications keep you informed about your favorite teams and events.</div>
-            </div>
-            <a class="button" href="./project-pages/meridian.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/calendly/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/calendly/screenshot_1.png" class="project-image" alt="Calendly Mobile app screenshot" loading="lazy" width="1290" height="2796">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Calendly Mobile</h3>
+								<p class="body-text project-card-text"><strong>Short-term Contract</strong> - Implemented "Schedule in Real Time" feature with calendar API integration and performance optimization.</p>
+							</div>
+							<a class="button" href="./project-pages/calendly.html" aria-label="Read more about Calendly Mobile project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-          <div class="project-card">
-            <img src="./assets/images/promly/screenshot_1.jpg" class="project-image">
-            <div class="project-card-text-container">
-              <div class="subheader-text project-title">Promly for High School</div>
-              <div class="body-text project-card-text">A social platform designed for high school students to connect, collaborate, and access mental health resources. Foster a supportive community and promote well-being among teens.</div>
-            </div>
-            <a class="button" href="./project-pages/promly.html">
-              <span class="button-text">Read More</span>
-              <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-            </a>
-          </div>
-        </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/cargo/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/cargo/screenshot_1.png" class="project-image" alt="Car:Go Anywhere app screenshot" loading="lazy" width="1284" height="2778">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Car:Go Anywhere</h3>
+								<p class="body-text project-card-text"><strong>Lead iOS Developer (Full-time)</strong> - Belgrade's Uber alternative serving 50k+ users. Led complete app overhaul and architecture redesign.</p>
+							</div>
+							<a class="button" href="./project-pages/cargo.html" aria-label="Read more about Car:Go Anywhere project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-        <!-- OPEN SOURCE PROJECTS -->
-        <div style="margin-top: 80px;">
-          <span class="subheader-text">Open Source</span>
-          <div class="body-text" style="margin-bottom: 40px;">Swift libraries and tools I've built for the iOS developer community.</div>
-          
-          <div class="projects-container">
-            <div class="project-card">
-              <img src="https://opengraph.githubassets.com/1/nemanjavlahovic/FloeKit" class="project-image" style="object-fit: cover;">
-              <div class="project-card-text-container">
-                <div class="subheader-text project-title">FloeKit</div>
-                <div class="body-text project-card-text">Elegant, modular UI building blocks for SwiftUI — design system, components, and utilities with built-in theming and accessibility.</div>
-              </div>
-              <a class="button" href="https://github.com/nemanjavlahovic/FloeKit" target="_blank">
-                <span class="button-text">View on GitHub</span>
-                <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-              </a>
-            </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/cub/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/cub/screenshot_1.png" class="project-image" alt="Cub Self-Care Pet app screenshot" loading="lazy" width="1290" height="2796">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Cub: Self-Care Pet</h3>
+								<p class="body-text project-card-text">A unique self-care app that gamifies your daily routines. Care for your virtual pet by completing real-life tasks and building healthy habits.</p>
+							</div>
+							<a class="button" href="./project-pages/cub.html" aria-label="Read more about Cub Self-Care Pet project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-            <div class="project-card">
-              <img src="https://opengraph.githubassets.com/1/nemanjavlahovic/FloeNet" class="project-image" style="object-fit: cover;">
-              <div class="project-card-text-container">
-                <div class="subheader-text project-title">FloeNet</div>
-                <div class="body-text project-card-text">🌐 Lightweight and elegant networking layer for Swift apps — minimal, modern, and testable.</div>
-              </div>
-              <a class="button" href="https://github.com/nemanjavlahovic/FloeNet" target="_blank">
-                <span class="button-text">View on GitHub</span>
-                <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-              </a>
-            </div>
-          </div>
-        </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/hapticlabs/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/hapticlabs/screenshot_1.jpg" class="project-image" alt="HapticLabs Player app screenshot" loading="lazy" width="1242" height="2688">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">HapticLabs Player</h3>
+								<p class="body-text project-card-text">Experience music in a new dimension with haptic feedback. This innovative player syncs vibrations with your favorite tunes for an immersive listening experience.</p>
+							</div>
+							<a class="button" href="./project-pages/hapticlabs.html" aria-label="Read more about HapticLabs Player project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-        <!-- INDIE & PERSONAL PROJECTS -->
-        <div style="margin-top: 80px;">
-          <span class="subheader-text">Indie &amp; Personal Projects</span>
-          <div class="body-text" style="margin-bottom: 40px;">Products I design, prototype, and ship on my own to explore new ideas and delight people I care about.</div>
-          
-          <div class="projects-container">
-            <div class="project-card">
-              <img src="./assets/images/midori/screenshot_1.png" class="project-image" style="object-fit: cover; object-position: top;" alt="Screenshot of Midori matcha ratio app">
-              <div class="project-card-text-container">
-                <div class="subheader-text project-title">Midori – Matcha Ratio</div>
-                <div class="body-text project-card-text">A minimalist brewing companion that instantly calculates perfect water-to-matcha ratios for ceremonial, premium, and culinary grades.</div>
-              </div>
-              <div style="display: flex; gap: 12px; padding: 16px;">
-                <a class="button" href="./project-pages/midori.html">
-                  <span class="button-text">Project Details</span>
-                  <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-                </a>
-                <a class="button" href="https://apps.apple.com/us/app/midori-matcha-ratio/id6751516587" target="_blank" rel="noopener">
-                  <span class="button-text">App Store</span>
-                  <img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="Arrow pointing right"/>
-                </a>
-              </div>
-            </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/included/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/included/screenshot_1.png" class="project-image" alt="Included Health app screenshot" loading="lazy" width="1242" height="2688">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Included Health</h3>
+								<p class="body-text project-card-text"><strong>Contract via Vicert</strong> - Healthcare platform refactoring. Led UIKit to SwiftUI migration following company merger.</p>
+							</div>
+							<a class="button" href="./project-pages/included.html" aria-label="Read more about Included Health project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-            <div class="project-card" style="opacity: 0.9;">
-              <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                <span style="font-size: 48px;">📅</span>
-              </div>
-              <div class="project-card-text-container">
-                <div class="subheader-text project-title">Daily Planner</div>
-                <div class="body-text project-card-text">A thoughtfully designed daily planning app that helps you focus on what matters most. Simple, beautiful, and distraction-free.</div>
-              </div>
-              <div style="padding: 16px;">
-                <span class="body-text" style="color: #667eea; font-weight: 500;">Coming Soon</span>
-              </div>
-            </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/meridian/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/meridian/screenshot_1.png" class="project-image" alt="Meridian Sport Srbija app screenshot" loading="lazy" width="1242" height="2688">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Meridian Sport Srbija</h3>
+								<p class="body-text project-card-text">Stay up-to-date with the latest sports news, live scores, and in-depth analysis from Serbia and around the world.</p>
+							</div>
+							<a class="button" href="./project-pages/meridian.html" aria-label="Read more about Meridian Sport Srbija project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
 
-            <div class="project-card" style="opacity: 0.9;">
-              <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                <span style="font-size: 48px;">💰</span>
-              </div>
-              <div class="project-card-text-container">
-                <div class="subheader-text project-title">Budget Tracker</div>
-                <div class="body-text project-card-text">Smart budgeting made simple. Track expenses, set goals, and build better financial habits with intuitive insights.</div>
-              </div>
-              <div style="padding: 16px;">
-                <span class="body-text" style="color: #f5576c; font-weight: 500;">Coming Soon</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+						<article class="project-card" data-type="contract">
+							<picture>
+								<source srcset="./assets/images/promly/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/promly/screenshot_1.jpg" class="project-image" alt="Promly for High School app screenshot" loading="lazy" width="1290" height="2796">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Promly for High School</h3>
+								<p class="body-text project-card-text">A social platform designed for high school students to connect, collaborate, and access mental health resources.</p>
+							</div>
+							<a class="button" href="./project-pages/promly.html" aria-label="Read more about Promly for High School project">
+								<span class="button-text">Read More</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
+					</div>
+				</div>
 
-    <!-- FOOTER -->
-    <div id="footer">
-      <a class="icon-link" target="_blank" href="https://github.com/nemanjavlahovic">
-        <img src="./assets/icons/github.png" class="footer-icon" alt="GitHub icon"/>
-      </a>
-      <a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/">
-        <img src="./assets/icons/linkedin.svg" class="footer-icon" alt="LinkedIn icon"/>
-      </a>
-      <a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com">
-        <img src="./assets/icons/mail.svg" class="footer-icon" alt="Email icon"/>
-      </a>
-    </div>
+				<!-- OPEN SOURCE PROJECTS -->
+				<div class="project-category" data-category="opensource">
+					<h2 class="subheader-text">Open Source</h2>
+					<p class="body-text category-description">Swift libraries and tools I've built for the iOS developer community.</p>
+
+					<div class="projects-container">
+						<article class="project-card" data-type="opensource">
+							<img src="https://opengraph.githubassets.com/1/nemanjavlahovic/FloeKit" class="project-image" style="object-fit: cover;" alt="FloeKit GitHub repository" loading="lazy">
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">FloeKit</h3>
+								<p class="body-text project-card-text">Elegant, modular UI building blocks for SwiftUI - design system, components, and utilities with built-in theming and accessibility.</p>
+							</div>
+							<a class="button" href="https://github.com/nemanjavlahovic/FloeKit" target="_blank" rel="noopener noreferrer" aria-label="View FloeKit on GitHub">
+								<span class="button-text">View on GitHub</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
+
+						<article class="project-card" data-type="opensource">
+							<img src="https://opengraph.githubassets.com/1/nemanjavlahovic/FloeNet" class="project-image" style="object-fit: cover;" alt="FloeNet GitHub repository" loading="lazy">
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">FloeNet</h3>
+								<p class="body-text project-card-text">Lightweight and elegant networking layer for Swift apps - minimal, modern, and testable.</p>
+							</div>
+							<a class="button" href="https://github.com/nemanjavlahovic/FloeNet" target="_blank" rel="noopener noreferrer" aria-label="View FloeNet on GitHub">
+								<span class="button-text">View on GitHub</span>
+								<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+							</a>
+						</article>
+					</div>
+				</div>
+
+				<!-- INDIE & PERSONAL PROJECTS -->
+				<div class="project-category" data-category="indie">
+					<h2 class="subheader-text">Indie &amp; Personal Projects</h2>
+					<p class="body-text category-description">Products I design, prototype, and ship on my own to explore new ideas and delight people I care about.</p>
+
+					<div class="projects-container">
+						<article class="project-card" data-type="indie">
+							<picture>
+								<source srcset="./assets/images/midori/screenshot_1.webp" type="image/webp">
+								<img src="./assets/images/midori/screenshot_1.png" class="project-image" style="object-fit: cover; object-position: top;" alt="Screenshot of Midori matcha ratio app" loading="lazy" width="738" height="1600">
+							</picture>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Midori - Matcha Ratio</h3>
+								<p class="body-text project-card-text">A minimalist brewing companion that instantly calculates perfect water-to-matcha ratios for ceremonial, premium, and culinary grades.</p>
+							</div>
+							<div class="project-buttons">
+								<a class="button" href="./project-pages/midori.html" aria-label="View Midori project details">
+									<span class="button-text">Project Details</span>
+									<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+								</a>
+								<a class="button" href="https://apps.apple.com/us/app/midori-matcha-ratio/id6751516587" target="_blank" rel="noopener noreferrer" aria-label="Download Midori from App Store">
+									<span class="button-text">App Store</span>
+									<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+								</a>
+							</div>
+						</article>
+
+						<article class="project-card coming-soon" data-type="indie">
+							<div class="coming-soon-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+								<span class="coming-soon-emoji">📅</span>
+							</div>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Daily Planner</h3>
+								<p class="body-text project-card-text">A thoughtfully designed daily planning app that helps you focus on what matters most. Simple, beautiful, and distraction-free.</p>
+							</div>
+							<div class="coming-soon-badge">
+								<span class="body-text" style="color: #667eea; font-weight: 500;">Coming Soon</span>
+							</div>
+						</article>
+
+						<article class="project-card coming-soon" data-type="indie">
+							<div class="coming-soon-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+								<span class="coming-soon-emoji">💰</span>
+							</div>
+							<div class="project-card-text-container">
+								<h3 class="subheader-text project-title">Budget Tracker</h3>
+								<p class="body-text project-card-text">Smart budgeting made simple. Track expenses, set goals, and build better financial habits with intuitive insights.</p>
+							</div>
+							<div class="coming-soon-badge">
+								<span class="body-text" style="color: #f5576c; font-weight: 500;">Coming Soon</span>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- CONTACT SECTION -->
+			<section id="contact" aria-labelledby="contact-heading">
+				<h2 class="subheader-text" id="contact-heading">Get In Touch</h2>
+				<p class="body-text" style="margin-bottom: 30px;">Have a project in mind? Let's discuss how I can help bring your iOS app to life.</p>
+
+				<form class="contact-form" action="https://formspree.io/f/xvgoanav" method="POST" aria-label="Contact form">
+					<div class="form-row">
+						<div class="form-group">
+							<label for="name" class="form-label">Name</label>
+							<input type="text" id="name" name="name" class="form-input" required placeholder="Your name" autocomplete="name">
+						</div>
+						<div class="form-group">
+							<label for="email" class="form-label">Email</label>
+							<input type="email" id="email" name="email" class="form-input" required placeholder="your@email.com" autocomplete="email">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="project-type" class="form-label">Project Type</label>
+						<select id="project-type" name="project-type" class="form-input form-select">
+							<option value="">Select a project type</option>
+							<option value="new-app">New App Development</option>
+							<option value="existing-app">Existing App Enhancement</option>
+							<option value="consultation">Technical Consultation</option>
+							<option value="code-review">Code Review / Audit</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="message" class="form-label">Message</label>
+						<textarea id="message" name="message" class="form-input form-textarea" required placeholder="Tell me about your project..." rows="5"></textarea>
+					</div>
+					<button type="submit" class="button submit-button">
+						<span class="button-text">Send Message</span>
+						<img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt="" aria-hidden="true"/>
+					</button>
+				</form>
+
+				<div class="contact-alternatives">
+					<p class="body-text">Or reach out directly:</p>
+					<a href="mailto:nemanja@nemanjavlahovic.com" class="contact-email">nemanja@nemanjavlahovic.com</a>
+				</div>
+			</section>
+		</main>
+
+		<!-- FOOTER -->
+		<footer id="footer" role="contentinfo">
+			<a class="icon-link" target="_blank" href="https://github.com/nemanjavlahovic" rel="noopener noreferrer" aria-label="GitHub profile">
+				<img src="./assets/icons/github.png" class="footer-icon" alt="" aria-hidden="true"/>
+			</a>
+			<a class="icon-link" target="_blank" href="https://www.linkedin.com/in/nemanja-vlahovic/" rel="noopener noreferrer" aria-label="LinkedIn profile">
+				<img src="./assets/icons/linkedin.svg" class="footer-icon" alt="" aria-hidden="true"/>
+			</a>
+			<a class="icon-link" href="mailto:nemanja@nemanjavlahovic.com" aria-label="Send email">
+				<img src="./assets/icons/mail.svg" class="footer-icon" alt="" aria-hidden="true"/>
+			</a>
+		</footer>
 
 	</body>
 </html>
