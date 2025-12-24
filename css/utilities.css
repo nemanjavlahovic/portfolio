@@ -1,15 +1,84 @@
+/* ============================================
+   CSS Variables & Dark Mode
+   ============================================ */
 
-/* Icons */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f0f0f0;
+  --text-primary: #141414;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --border-color: #141414;
+  --border-light: #e0e0e0;
+  --accent-color: #007AFF;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #252525;
+  --bg-tertiary: #2d2d2d;
+  --text-primary: #f0f0f0;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888888;
+  --border-color: #f0f0f0;
+  --border-light: #404040;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Apply theme colors */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* ============================================
+   Skip Link (Accessibility)
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 8px 16px;
+  z-index: 1000;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   Icons
+   ============================================ */
 
 .right-arrow-icon {
   width: 16px;
   height: 16px;
   margin-top: 1px;
+  transition: transform var(--transition-fast);
 }
 
 .footer-icon {
   width: 20px;
   height: 20px;
+  filter: var(--icon-filter, none);
+}
+
+[data-theme="dark"] .footer-icon {
+  filter: invert(1);
 }
 
 a.icon-link {
@@ -23,8 +92,9 @@ a.icon-link:hover {
   transform: rotate(15deg);
 }
 
-
-/* Navbar Styling */
+/* ============================================
+   Navbar Styling
+   ============================================ */
 
 .navbar {
   width: 100%;
@@ -35,10 +105,19 @@ a.icon-link:hover {
   position: fixed;
   top: 0;
   left: 0;
+  background-color: var(--bg-primary);
+  z-index: 100;
+  transition: background-color var(--transition-normal);
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .nav-title-link {
-  color: black;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -46,37 +125,113 @@ a.icon-link:hover {
   text-decoration: underline;
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background-color: var(--bg-secondary);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.theme-toggle .sun-icon {
+  display: block;
+}
+
+.theme-toggle .moon-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: block;
+}
+
 /* Small devices (portrait tablets and large phones, 800px and below) */
 @media only screen and (max-width: 800px) {
   .navbar {
     padding: 20px 20px;
-    background-color: white
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .nav-links {
+    gap: 8px;
+  }
 
-/* Button Styling */
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+}
 
-a.button {
+/* ============================================
+   Button Styling
+   ============================================ */
+
+a.button,
+button.button {
   padding: 8px 16px;
-  border: 3px solid #141414;
+  border: 3px solid var(--border-color);
   border-radius: 50px;
-  color: black;
+  color: var(--text-primary);
+  background-color: transparent;
   text-decoration: none;
   width: fit-content;
   display: flex;
   gap: 5px;
   align-items: center;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-a.button:hover {
+a.button:hover,
+button.button:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow);
 }
 
+a.button:hover .right-arrow-icon,
+button.button:hover .right-arrow-icon {
+  transform: translateX(3px);
+}
 
-/* Footer Styling */
+a.button:focus,
+button.button:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.submit-button {
+  margin-top: 10px;
+}
+
+/* ============================================
+   Footer Styling
+   ============================================ */
 
 #footer {
   width: 100%;
@@ -85,12 +240,13 @@ a.button:hover {
   justify-content: center;
   align-items: center;
   gap: 16px;
+  background-color: var(--bg-primary);
 }
 
 /* Link Styling */
 a.no-underline {
   text-decoration: none;
-  color: black
+  color: var(--text-primary);
 }
 
 a.no-underline:hover {
@@ -98,10 +254,12 @@ a.no-underline:hover {
   cursor: pointer;
 }
 
-/* Code Block Styling */
+/* ============================================
+   Code Block Styling
+   ============================================ */
 
 .code-block {
-  background-color: #f8f9fa;
+  background-color: var(--bg-secondary);
   padding: 16px;
   border-radius: 8px;
   font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
@@ -110,7 +268,392 @@ a.no-underline:hover {
   overflow-x: auto;
 }
 
-/* Small devices (portrait tablets and large phones, 800px and below) */
+/* ============================================
+   Services Section
+   ============================================ */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.service-card {
+  background-color: var(--bg-secondary);
+  padding: 24px;
+  border-radius: 12px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--bg-tertiary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.service-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+@media only screen and (max-width: 1000px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Testimonials Section
+   ============================================ */
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.testimonial-card {
+  background-color: var(--bg-secondary);
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 4px solid var(--text-primary);
+  margin: 0;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.testimonial-text {
+  font-size: 15px;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial-author strong {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.testimonial-author span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media only screen and (max-width: 1000px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Project Filters
+   ============================================ */
+
+.project-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  border: 2px solid var(--border-light);
+  border-radius: 50px;
+  background-color: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.filter-btn:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Project Categories
+   ============================================ */
+
+.project-category {
+  margin-bottom: 60px;
+  animation: fadeIn var(--transition-slow) ease;
+}
+
+.project-category.hidden {
+  display: none;
+}
+
+.category-description {
+  margin-bottom: 40px;
+}
+
+/* ============================================
+   Project Cards - Enhanced
+   ============================================ */
+
+.project-card {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.project-card picture {
+  display: block;
+  width: 100%;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+
+/* Coming Soon Cards */
+.coming-soon {
+  opacity: 0.9;
+}
+
+.coming-soon-image {
+  height: 200px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coming-soon-emoji {
+  font-size: 48px;
+}
+
+.coming-soon-badge {
+  padding: 16px;
+}
+
+/* ============================================
+   Contact Form
+   ============================================ */
+
+.contact-form {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-input {
+  padding: 12px 16px;
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .form-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-alternatives {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-light);
+}
+
+.contact-email {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.contact-email:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scroll animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animations for cards */
+.project-card {
+  animation: fadeIn 0.5s ease backwards;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+.project-card:nth-child(7) { animation-delay: 0.7s; }
+
+.service-card {
+  animation: fadeIn 0.5s ease backwards;
+}
+
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+.service-card:nth-child(3) { animation-delay: 0.3s; }
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+
+.testimonial-card {
+  animation: fadeIn 0.5s ease backwards;
+}
+
+.testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
 @media only screen and (max-width: 800px) {
   #footer {
     padding: 20px 20px;
@@ -119,5 +662,16 @@ a.no-underline:hover {
   .code-block {
     padding: 12px;
     font-size: 14px;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
