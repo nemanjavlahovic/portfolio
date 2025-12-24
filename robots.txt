@@ -1,0 +1,10 @@
+# robots.txt for nemanjavlahovic.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nemanjavlahovic.com/sitemap.xml
+
+# Crawl-delay (optional, be nice to the server)
+Crawl-delay: 10
